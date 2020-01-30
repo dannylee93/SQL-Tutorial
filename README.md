@@ -1,4 +1,4 @@
-<center><img src="https://cdn.oracletutorial.com/wp-content/uploads/2019/07/oracle-tutorial.png" style="zoom:67%;" /></center>
+<p align="center"><img src="https://cdn.oracletutorial.com/wp-content/uploads/2019/07/oracle-tutorial.png" /></p>
 
 # SQL Tutorial
 
