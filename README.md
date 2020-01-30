@@ -1,7 +1,9 @@
 <p align="center"><img src="https://ir0.mobify.com/project-oss-www-fujitsu-com/c8/webp80/1536/https://www.fujitsu.com/fts/Images/oracle-db580x224_tcm21-40873.jpg" /></p>
 # SQL Tutorial
 
->  Learn how to use SQL with Oracle Database and SQL Developer
+> Learn how to use SQL with Oracle Database and SQL Developer
+
+
 
 
 
