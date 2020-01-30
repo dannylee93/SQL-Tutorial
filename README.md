@@ -1,6 +1,6 @@
-![](https://cdn.oracletutorial.com/wp-content/uploads/2019/07/oracle-tutorial.png)
+![](https://cdn.oracletutorial.com/wp-content/uploads/2019/07/oracle-tutorial.png){:.aligncenter}
 
-___
+
 
 
 
