@@ -37,6 +37,4 @@ Learn the essential knowledge for data manipulation and analysis(DML) that usefu
 
 <p align="center"><img src="https://lh6.googleusercontent.com/proxy/o0Dpx6een5btxurc-tIEgmLBpuP_nJqERMpZOkRRhFLCGDCVVu2dmGZ3sDWLlKI9HycEqX9psuPRwhrnU78Bx4PzgBv7aeYvoRJkXr4RWFGh1xU" /></p>
 <p align="center"><img src="https://yt3.ggpht.com/a/AGF-l79QdDu-DazwGD3GsLSJ09wetKV2givOVsT4XQ=s288-c-k-c0xffffffff-no-rj-mo" /></p>
-
 <p align="center"><b>newlecture.com(also you can watch it on Youtube)</b></p>
-
