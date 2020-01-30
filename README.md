@@ -1,5 +1,4 @@
 <p align="center"><img src="https://ir0.mobify.com/project-oss-www-fujitsu-com/c8/webp80/1536/https://www.fujitsu.com/fts/Images/oracle-db580x224_tcm21-40873.jpg" /></p>
-
 # SQL Tutorial
 
 >  Learn how to use SQL with Oracle Database and SQL Developer
@@ -12,7 +11,7 @@
 
   *Microsoft Windows (x64)*
 
-- **SQL Developer 19.2.1 **
+- **SQL Developer 19.2.1**
 
   *Version 19.2.1.247.2212 - September 12, 2019 /  Windows 32-bit/64-bit*
 
@@ -37,8 +36,7 @@ Learn the essential knowledge for data manipulation and analysis(DML) that usefu
  *I REFER TO :*
 
 <p align="center"><img src="https://lh6.googleusercontent.com/proxy/o0Dpx6een5btxurc-tIEgmLBpuP_nJqERMpZOkRRhFLCGDCVVu2dmGZ3sDWLlKI9HycEqX9psuPRwhrnU78Bx4PzgBv7aeYvoRJkXr4RWFGh1xU" /></p>
+<p align="center"><img src="https://yt3.ggpht.com/a/AGF-l79QdDu-DazwGD3GsLSJ09wetKV2givOVsT4XQ=s288-c-k-c0xffffffff-no-rj-mo" /></p>
 
-<p align="center"><img src="https://yt3.ggpht.com/a/AGF-l79QdDu-DazwGD3GsLSJ09wetKV2givOVsT4XQ=s288-c-k-c0xffffffff-no-rj-mo" />newlecture.com(also you can watch it on Youtube)</p>
-
-
+<p align="center"><b>newlecture.com(also you can watch it on Youtube)</b></p>
 
