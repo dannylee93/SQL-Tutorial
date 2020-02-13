@@ -1,3 +1,3 @@
 SELECT
     *
-FROM sample_product;
+FROM employees;
