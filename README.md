@@ -23,7 +23,6 @@ Learn the essential knowledge for data manipulation and analysis(DML) that usefu
  *I REFER TO :*
 
 <p align="center"><img src="https://lh6.googleusercontent.com/proxy/o0Dpx6een5btxurc-tIEgmLBpuP_nJqERMpZOkRRhFLCGDCVVu2dmGZ3sDWLlKI9HycEqX9psuPRwhrnU78Bx4PzgBv7aeYvoRJkXr4RWFGh1xU" /></p>
-
 ## Requirements
 
 - **Oracle Database 11g Release 2 Standard Edition** 
