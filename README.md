@@ -4,20 +4,6 @@
 
 
 
-
-
-### Requirements
-
-- **Oracle Database 11g Release 2 Standard Edition** 
-
-  *Microsoft Windows (x64)*
-
-- **SQL Developer 19.2.1**
-
-  *Version 19.2.1.247.2212 - September 12, 2019 /  Windows 32-bit/64-bit*
-
-
-
 ### Practice_Sample.sql
 
 Practice SQL Tutorial with sample data from Oracle and Learn how to develop modular and procedural programs in Oracle Database using SQL programming language.
@@ -37,3 +23,14 @@ Learn the essential knowledge for data manipulation and analysis(DML) that usefu
  *I REFER TO :*
 
 <p align="center"><img src="https://lh6.googleusercontent.com/proxy/o0Dpx6een5btxurc-tIEgmLBpuP_nJqERMpZOkRRhFLCGDCVVu2dmGZ3sDWLlKI9HycEqX9psuPRwhrnU78Bx4PzgBv7aeYvoRJkXr4RWFGh1xU" /></p>
+
+## Requirements
+
+- **Oracle Database 11g Release 2 Standard Edition** 
+
+  *Microsoft Windows (x64)*
+
+- **SQL Developer 19.2.1**
+
+  *Version 19.2.1.247.2212 - September 12, 2019 /  Windows 32-bit/64-bit*
+
