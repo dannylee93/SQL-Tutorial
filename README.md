@@ -4,6 +4,12 @@
 
 
 
+
+
+
+
+## Folders
+
 ### Practice_Sample.sql
 
 Practice SQL Tutorial with sample data from Oracle and Learn how to develop modular and procedural programs in Oracle Database using SQL programming language.
