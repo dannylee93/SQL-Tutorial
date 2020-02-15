@@ -1,14 +1,12 @@
 <p align="center"><img src="https://ir0.mobify.com/project-oss-www-fujitsu-com/c8/webp80/1536/https://www.fujitsu.com/fts/Images/oracle-db580x224_tcm21-40873.jpg" /></p>
-<h1>SQL Tutorial</h1>
+
+# SQL Tutorial
+
 > Learn how to use SQL with Oracle Database and SQL Developer
 
 
 
 
-
-
-
-## Folders
 
 ### Practice_Sample.sql
 
@@ -29,6 +27,8 @@ Learn the essential knowledge for data manipulation and analysis(DML) that usefu
  *I REFER TO :*
 
 <p align="center"><img src="https://lh6.googleusercontent.com/proxy/o0Dpx6een5btxurc-tIEgmLBpuP_nJqERMpZOkRRhFLCGDCVVu2dmGZ3sDWLlKI9HycEqX9psuPRwhrnU78Bx4PzgBv7aeYvoRJkXr4RWFGh1xU" /></p>
+
+
 ## Requirements
 
 - **Oracle Database 11g Release 2 Standard Edition** 
