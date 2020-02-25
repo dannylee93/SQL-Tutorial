@@ -280,3 +280,117 @@ Extended ER모델이라고 부르는 이 모델은, 공통의 부분은 슈퍼�
 
 여기서 중간에 CREATE를 보면 새로 [수강신청] 테이블의 FK를 생성했더니 맨 아래에서 Range scan으로 변경됨을 볼 수 있다.
 
+
+
+## 분산 데이터베이스의 성능
+
+> 여러 곳으로 분산 되어있는 데이터베이스를 하나의 가상 시스템으로 사용할 수 있도록 하거나, 논리적으로 동일한 시스템이지만, 컴퓨터 네트워크를 통해 분산되어있는 데이터들의 모임을 말한다.
+
+
+
+#### 투명성(Transparency)
+
+분산 데이터베이스가 되려면 6가지의 투명성을 만족해야한다.
+
+1. `분할 투명성 (단편화)` : 하나의 논리적 Relation이 여러 단편으로 분할되어 각 단편의 사본이 여러 site에 저장
+2. `위치 투명성` : 사용하려는 데이터의 저장 장소 명시 불필요. 위치정보가 System Catalog에 유지되어야 함
+3. `지역사상 투명성` : 지역DBMS와 물리적 DB사이의 Mapping 보장. 각 지역시스템 이름과 무관한 이름 사용 가능
+4. `중복 투명성` : DB 객체가 여러 site에 중복 되어 있는지 알 필요가 없는 성질
+5. `장애 투명성` : 구성요소(DBMS, Computer)의 장애에 무관한 Transaction의 원자성 유지
+6. `병행 투명성` : 다수 Transaction 동시 수행시 결과의 일관성 유지, Time Stamp, 분산 2단계 Locking을 이용 구현
+
+말은 이렇게 했지만 다 만족하면서 구축하는 건 쉽지 않고 최근에는 통합해서 구축하는 사례도 많다고 한다. 그래도 상황에 맞게 활용하면 좋다.
+
+#### 적용방법 및 장단점
+
+1. 적용방법:
+
+   업무 특징에 따라 분산구조를 선택적으로 설계하는 것이 중요
+
+2. 장단점
+
+   ![](http://www.dbguide.net/publishing/img/knowledge/SQL_129.jpg)
+
+
+
+#### 활용 방향성
+
+업무 특징에 따라 다르게 활용하는 기술이 필요하다.
+
+![](http://www.dbguide.net/publishing/img/knowledge/SQL_130.jpg)
+
+> 업무적 특징에 따라 지역별로 분산할 지 외부 공개 유무에 따라 분산할 지 고민할 수 도 있다.
+
+
+
+#### 분산구성의 가치
+
+분산 환경으로 만들 때 가장 핵심적인 가치는 통합된 데이터베이스보다 성능이 좋아야한다는 점이다. 
+
+
+
+#### 적용기법
+
+1. *테이블 위치 분산*
+2. *테이블 분할(Fragmentation) 분산*
+3. *테이블 복제(Replication) 분산*
+4. *테이블 요약(Summarization) 분산*
+
+
+
+1. **위치 분산**
+
+   목적에 따라, 서로 테이블을 단순하게 나눠 가질 수 도있다.
+
+   ![](http://www.dbguide.net/publishing/img/knowledge/SQL_132.jpg)
+
+   > 각 업무 환경에 테이블 나눠 가졌지만 이러면 테이블의 위치를 파악할 수 있는 도식화된 문서 필요하다.
+
+2. 테이블 분할(Fragmentation) 분산
+
+   Row 단위로 분리하는 `수평분할`이 있고 Column 단위로 분리하는 `수직분할`  두 가지가 있다.
+
+   ![](http://www.dbguide.net/publishing/img/knowledge/SQL_134.jpg)
+
+   이렇게 수평분할 하는 이유는 각 지사(node)별로 사용하는 행이 다를 때 이용하는 것이다.
+
+   수직분할은 아래 이미지와 같이 각 지사별로 관리하는 품목이 다른 것과 같이 업무 특징에 따라 열을 나눌 수도있다.
+
+   ![](http://www.dbguide.net/publishing/img/knowledge/SQL_136.jpg)
+
+   만약 위와 같이 **분할분산** 을 했다면, 아래와 같이 지사별로 흩어진 테이블을 `Join` 해서 가져와야한다.
+
+   ![](http://www.dbguide.net/publishing/img/knowledge/SQL_137.jpg)
+
+3. 테이블 복제(Replication) 분산
+
+   똑같은 테이블을 각 지사나 서버 별로 동시에 생성하고 관리하는 방법이다.
+
+   `Master베이스` 에서 *일부 내용*만 다른 곳에 분산하는 거는 `부분복제(Segment Replication)`  라고 하며, Master베이스 *그대로*의 내용을 분산하는 거는 `광역복제(Broadcast Replication)` 라 한다.
+
+   ![](http://www.dbguide.net/publishing/img/knowledge/SQL_138.jpg)
+
+   > 본사의 마스터베이스는 지사 마다 분산된 분산데이터의 합이 되는 것이다. 본사 데이터에 통합처리를 하기 때문에 여러 테이블의 Join 처리가 필요 없다.
+
+   **광역 복제**는 통합 테이블을 본사가 다 가지고 있으면서도 각 지사에 동일한 데이터를 주는 것이다. 
+
+4. 테이블 요약(Summarization) 분산
+
+   - `분석요약(Rollup Summarization)` :
+
+     동일한 테이블 구조를 가지면서 분산되어 있는 동일한 내용의 데이터를 통합해서 산출
+
+     (예: 각 지사의 동일한 제품에 대한 판매실적 데이터)
+
+     ![](http://www.dbguide.net/publishing/img/knowledge/SQL_143.jpg)
+
+   - `통합요약(Consolidation Summarization)` :
+
+     분산되어 있는 다른 내용의 데이터를 이용하여 통합된 데이터를 산출하는 방식
+
+     ![](http://www.dbguide.net/publishing/img/knowledge/SQL_145.jpg)
+
+     > 위에 두 이미지에서 첫 번째는 두개의 회색이 하나의 검은색이 되고, 두 번째는 각각의 영역이 합쳐 하나의 검은색이 된 것을 표현했다.
+
+     
+
