@@ -7,17 +7,56 @@
    ```
 
    ```sql
-   [예제] Oracle CREATE TABLE PLAYER ( PLAYER_ID CHAR(7) NOT NULL, PLAYER_NAME VARCHAR2(20) NOT NULL, TEAM_ID CHAR(3) NOT NULL, E_PLAYER_NAME VARCHAR2(40), NICKNAME VARCHAR2(30), JOIN_YYYY CHAR(4), POSITION VARCHAR2(10), BACK_NO NUMBER(2), NATION VARCHAR2(20), BIRTH_DATE DATE, SOLAR CHAR(1), HEIGHT NUMBER(3), WEIGHT NUMBER(3), CONSTRAINT PLAYER_PK PRIMARY KEY (PLAYER_ID), CONSTRAINT PLAYER_FK FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID) ); 테이블이 생성되었다.
+   CREATE TABLE PLAYER ( PLAYER_ID CHAR(7) NOT NULL, 
+                        PLAYER_NAME VARCHAR2(20) NOT NULL, 
+                        TEAM_ID CHAR(3) NOT NULL, 
+                        E_PLAYER_NAME VARCHAR2(40), 
+                        NICKNAME VARCHAR2(30), JOIN_YYYY CHAR(4),
+                        POSITION VARCHAR2(10), BACK_NO NUMBER(2), 
+                        NATION VARCHAR2(20), BIRTH_DATE DATE, 
+                        SOLAR CHAR(1), HEIGHT NUMBER(3), WEIGHT NUMBER(3),
+                        CONSTRAINT PLAYER_PK PRIMARY KEY (PLAYER_ID),
+                        CONSTRAINT PLAYER_FK 
+                        FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID) 
+                        ); 
    ```
 
 2. 제약조건 예제
 
    ```sql
-   테이블명 : TEAM 테이블 설명 : K-리그 선수들의 소속팀에 대한 정보를 가지고 있는 테이블 칼럼명 : TEAM_ID (팀 고유 ID) 문자 고정 자릿수 3자리,REGION_NAME (연고지 명) 문자 가변 자릿수 8자리,TEAM_NAME (한글 팀 명) 문자 가변 자릿수 40자리,E-TEAM_NAME (영문 팀 명) 문자 가변 자릿수 50자리 ,ORIG_YYYY (창단년도) 문자 고정 자릿수 4자리,STADIUM_ID (구장 고유 ID) 문자 고정 자릿수 3자리,ZIP_CODE1 (우편번호 앞 3자리) 문자 고정 자릿수 3자리,ZIP_CODE2 (우편번호 뒷 3자리) 문자 고정 자릿수 3자리,ADDRESS (주소) 문자 가변 자릿수 80자리,DDD (지역번호) 문자 가변 자릿수 3자리,TEL (전화번호) 문자 가변 자릿수 10자리,FAX (팩스번호) 문자 가변 자릿수 10자리,HOMEPAGE (홈페이지) 문자 가변 자릿수 50자리OWNER (구단주) 문자 가변 자릿수 10자리, 제약조건 : 기본 키(PRIMARY KEY) → TEAM_ID (제약조건명은 TEAM_ID_PK) NOT NULL → REGION_NAME, TEAM_NAME, STADIUM_ID (제약조건명은 미적용)
+   테이블명 : TEAM 테이블 
+   설명 : K-리그 선수들의 소속팀에 대한 정보를 가지고 있는 테이블 
+   칼럼명 :TEAM_ID (팀 고유 ID) 문자 고정 자릿수 3자리,
+          REGION_NAME (연고지 명) 문자 가변 자릿수 8자리,
+          TEAM_NAME (한글 팀 명) 문자 가변 자릿수 40자리,
+          E-TEAM_NAME (영문 팀 명) 문자 가변 자릿수 50자리, 
+          ORIG_YYYY (창단년도) 문자 고정 자릿수 4자리,
+          STADIUM_ID (구장 고유 ID) 문자 고정 자릿수 3자리,
+          ZIP_CODE1 (우편번호 앞 3자리) 문자 고정 자릿수 3자리,
+          ZIP_CODE2 (우편번호 뒷 3자리) 문자 고정 자릿수 3자리,
+          ADDRESS (주소) 문자 가변 자릿수 80자리,
+          DDD (지역번호) 문자 가변 자릿수 3자리,
+          TEL (전화번호) 문자 가변 자릿수 10자리,
+          FAX (팩스번호) 문자 가변 자릿수 10자리,
+          HOMEPAGE (홈페이지) 문자 가변 자릿수 50자리,
+          OWNER (구단주) 문자 가변 자릿수 10자리, 
+   제약조건 : 기본 키(PRIMARY KEY) → TEAM_ID (제약조건명은 TEAM_ID_PK) NOT NULL → REGION_NAME, TEAM_NAME, STADIUM_ID (제약조건명은 미적용)
    ```
 
    ```sql
-   [예제] Oracle CREATE TABLE TEAM ( TEAM_ID CHAR(3) NOT NULL, REGION_NAME VARCHAR2(8) NOT NULL, TEAM_NAME VARCHAR2(40) NOT NULL, E_TEAM_NAME VARCHAR2(50), ORIG_YYYY CHAR(4), STADIUM_ID CHAR(3) NOT NULL, ZIP_CODE1 CHAR(3), ZIP_CODE2 CHAR(3), ADDRESS VARCHAR2(80), DDD VARCHAR2(3), TEL VARCHAR2(10), FAX VARCHAR2(10), HOMEPAGE VARCHAR2(50), OWNER VARCHAR2(10), CONSTRAINT TEAM_PK PRIMARY KEY (TEAM_ID), CONSTRAINT TEAM_FK FOREIGN KEY (STADIUM_ID) REFERENCES STADIUM(STADIUM_ID) ); 테이블이 생성되었다.
+   [예제] Oracle 
+   CREATE TABLE TEAM ( TEAM_ID CHAR(3) NOT NULL,
+                      REGION_NAME VARCHAR2(8) NOT NULL, 
+                      TEAM_NAME VARCHAR2(40) NOT NULL, 
+                      E_TEAM_NAME VARCHAR2(50), ORIG_YYYY CHAR(4), 
+                      STADIUM_ID CHAR(3) NOT NULL, ZIP_CODE1 CHAR(3), 
+                      ZIP_CODE2 CHAR(3), ADDRESS VARCHAR2(80),
+                      DDD VARCHAR2(3), TEL VARCHAR2(10), FAX VARCHAR2(10),
+                      HOMEPAGE VARCHAR2(50), OWNER VARCHAR2(10), 
+                      CONSTRAINT TEAM_PK PRIMARY KEY (TEAM_ID), 
+                      CONSTRAINT TEAM_FK FOREIGN KEY (STADIUM_ID) 
+                      REFERENCES STADIUM(STADIUM_ID) 
+                      ); 
    ```
 
 3. 생성된 테이블 구조 확인

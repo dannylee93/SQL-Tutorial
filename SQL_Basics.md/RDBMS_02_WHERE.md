@@ -129,6 +129,8 @@ SQL연산자는 비교연산자 보다 조금더 확장된 연산자로, 조회�
 
   데이터 값이 `NULL` 인 데이터를 조회한다.
 
+  주의: null 값을 조건절에서 사용할 때는 `IS NULL` 또는 `IS NOT NULL` 을 사용해야 한다.
+  
   ```sql
   # 예제(manager_id가 null 인 데이터)
   SELECT *
