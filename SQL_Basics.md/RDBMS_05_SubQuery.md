@@ -152,4 +152,147 @@ ORDER BY 선수명;
 
    ![sql가이드](http://www.dbguide.net/publishing/img/knowledge/SQL_220.jpg)
 
+   > 상단의 그림은 2개의 SQL문 조합이다. 선수정보인 메인쿼리와 해당 소속 선수의 팀별 평균키를 알아내는 서브쿼리이다.
+
    SELECT 절에서 사용하는 서브쿼리를 **스칼라 서브쿼리(Scalar Subquery)**라고 한다.
+
+   - 예제코드 :
+
+     ```sql
+     SELECT PLAYER_NAME 선수명, HEIGHT 키, (
+                                           SELECT AVG(HEIGHT) 
+                                           FROM PLAYER X 
+                                           WHERE X.TEAM_ID = P.TEAM_ID
+                                           ) AS 팀평균키 
+     FROM PLAYER P
+     ```
+
+2. FROM 절에서 서브쿼리 사용하기
+
+   FROM절에서 서브쿼리를 사용하는 것을 `인라인 뷰(Inline View)` 라고 한다. 원래 FROM절에는 테이블 명이 온다. 근데 서브쿼리가 FROM절에서 사용되면 **서브쿼리의 결과가 마치 실행 시에 동적으로 생성된 테이블인 것처럼 사용**할 수 있다. 
+
+   그래서 일반적인 뷰를 **정적 뷰(Static View)** 라고도 하며 인라인 뷰를 **동적 뷰(Dynamic View)** 라고도 부른다.
+
+   - 예제코드 :
+
+     ```sql
+     SELECT T.TEAM_NAME 팀명, P.PLAYER_NAME 선수명, P.BACK_NO 백넘버 
+     FROM (
+           SELECT TEAM_ID, PLAYER_NAME, BACK_NO 
+           FROM PLAYER 
+           WHERE POSITION = 'MF'
+           ) P, 
+           TEAM T       
+     WHERE P.TEAM_ID = T.TEAM_ID 
+     ORDER BY 선수명;
+     ```
+
+     >  인라인 뷰의 칼럼은 SQL문 자유롭게 참조할 수 있다. K-리그 선수들 중에서 포지션이 미드필더(MF)인 선수들의 소속팀명 및 선수 정보를 출력하고자 한다.
+
+     ```sql
+     # TOP N
+     SELECT PLAYER_NAME 선수명, POSITION 포지션, BACK_NO 백넘버, HEIGHT 키 
+     FROM (
+           SELECT PLAYER_NAME, POSITION, BACK_NO, HEIGHT 
+           FROM PLAYER 
+           WHERE HEIGHT IS NOT NULL 
+           ORDER BY HEIGHT DESC
+           )
+     WHERE ROWNUM <= 5;
+     ```
+
+     > 인라인 뷰에서는 ORDER BY절을 사용할 수 있다. 인라인 뷰에 먼저 정렬을 수행하고 정렬된 결과 중에서 일부 데이터를 추출하는 것을 TOP-N 쿼리라고 한다. 
+
+3. HAVING 절에서 서브쿼리 사용하기
+
+   HAVING 절은 그룹함수와 함께 사용될 때 그룹핑 된 결과에 대해 부가적인 조건을 주기 위해 사용한다.
+
+   ```SQL
+   SELECT P.TEAM_ID 팀코드, T.TEAM_NAME 팀명, AVG(P.HEIGHT) 평균키 
+   FROM PLAYER P, TEAM T 
+   WHERE P.TEAM_ID = T.TEAM_ID 
+   GROUP BY P.TEAM_ID, T.TEAM_NAME 
+   HAVING AVG(P.HEIGHT) < (
+                           SELECT AVG(HEIGHT) 
+                           FROM PLAYER 
+                           WHERE TEAM_ID ='K02'
+                           )
+   ```
+
+   > 평균키가 삼성 블루윙즈팀의 평균키보다 작은 팀의 이름과 해당 팀의 평균키를 구하는 SQL문
+
+4. UPDATE문의 SET 절에서 사용하기
+
+   현재 테이블에 없는 새로운 칼럼을 추가할 때 사용.
+
+   ```SQL
+   UPDATE TEAM A 
+   SET A.STADIUM_NAME = (
+                         SELECT X.STADIUM_NAME 
+                         FROM STADIUM X 
+                         WHERE X.STADIUM_ID = A.STADIUM_ID
+                         )
+   ;
+   ```
+
+   >  TEAM 테이블에 추가된 STADIUM_NAME의 값을 STADIUM 테이블을 이용하여 변경하고자 할 때 다음과 같이 SQL문
+
+5. INSERT문의 VALUES 절에서 사용하기
+
+   테이블에 새로운 선수(행 데이터) 삽입할 때 사용한다.
+
+   ```SQL
+   # 3개 열에 3개 데이터 삽입
+   
+   INSERT INTO PLAYER(PLAYER_ID, PLAYER_NAME, TEAM_ID) 
+   VALUES(
+          (SELECT TO_CHAR(MAX(TO_NUMBER(PLAYER_ID))+1) FROM PLAYER), 
+           '홍길동', 
+           'K06'
+          )
+   ;
+   ```
+
+   
+
+## 뷰 View
+
+> 테이블은 실제 데이터를 가지고 있지만, 뷰 는 실제 데이터를 가지고 있지 않다. 하지만 테이블이 수행하는 역할을 수행하기 때문에 가상 테이블(Virtual Table)이라고도 한다.
+
+
+
+![sql가이드](http://www.dbguide.net/publishing/img/knowledge/SQL_221.jpg)
+
+#### 예제코드
+
+- 뷰는 `CREATE VIEW` 문으로 생성
+
+  ```SQL
+  CREATE VIEW V_PLAYER_TEAM AS 
+  SELECT P.PLAYER_NAME, P.POSITION, P.BACK_NO, P.TEAM_ID, T.TEAM_NAME 
+  FROM PLAYER P, TEAM T 
+  WHERE P.TEAM_ID = T.TEAM_ID;
+  ```
+
+  > 이 뷰 작성문은 선수정보와 해당 선수가 속한 팀명을 같이 추출하며 뷰 명칭은 'V_PLAYER_TEAM' 이다.
+
+- 뷰는 테이블 뿐만 아니라 이미 존재하는 뷰를 참조해서도 생성 가능
+
+  ```SQL
+  CREATE VIEW V_PLAYER_TEAM_FILTER AS 
+  SELECT PLAYER_NAME, POSITION, BACK_NO, TEAM_NAME 
+  FROM V_PLAYER_TEAM 
+  WHERE POSITION IN ('GK', 'MF');
+  ```
+
+  > V_PLAYER_TEAM_FILTER 뷰는 이미 앞에서 생성했던 V_PLAYER_TEAM 뷰를 기반으로 해서 생성된 뷰다. 이번 코드는 이미 생성한 뷰에서도 특정 포지션만 추출하는 뷰 이다.
+
+- 이제 생성해본 뷰를 사용해보자
+
+  ```SQL
+  SELECT PLAYER_NAME, POSITION, BACK_NO, TEAM_ID, TEAM_NAME 
+  FROM V_PLAYER_TEAM 
+  WHERE PLAYER_NAME LIKE '황%'
+  ```
+
+  > 해당 뷰의 이름을 FROM에서 사용하면 된다.
