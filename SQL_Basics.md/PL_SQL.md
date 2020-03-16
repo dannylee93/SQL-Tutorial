@@ -246,3 +246,13 @@ ORDER BY SCHE_DATE;
 
 ![sql가이드](http://www.dbguide.net/publishing/img/knowledge/SQL_236.jpg)
 
+![sql가이드](http://www.dbguide.net/publishing/img/knowledge/SQL_237.jpg)
+
+
+
+## 프로시저와 트리거의 차이점
+
+![sql가이드](http://www.dbguide.net/publishing/img/knowledge/SQL_238.jpg)
+
+프로시저는 BEGIN ~ END 절 내에 COMMIT, ROLLBACK과 같은 트랜잭션 종료 명령어를 사용할 수 있지만, 데이터베이스 트리거는 BEGIN ~ END 절 내에 사용할 수 없다.
+
